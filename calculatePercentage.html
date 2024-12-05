@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input,button{
+            border-radius: 8px;
+        }
+    </style>
+</head>;
+<body style=" display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh;">
+    <div style="  padding: 10px; border-radius: 16px; background: linear-gradient(to bottom, #33ccff 0%, #ffff00 100%);">
+        <h1 style="text-align: center;">Percentage Calculator</h1>
+            <label for="">
+               Please Enter marks of Subject 1
+            </label>
+            <input type="number" id="sub1">
+            <br>
+            <br>
+            <label for=""> Please Enter marks of Subject 2
+             </label>
+            <input type="number" id="sub2">
+            <br>
+            <br>
+            <label for="">
+                Please Enter marks of Subject 3
+            </label>
+            <input type="number" id="sub3">
+            <br>
+            <br>
+
+            <div style="display: flex; justify-content: center;">
+                <button onclick="calculateAveragePer()" style=" font-family:Arial, Helvetica, sans-serif; font-weight: 500; font-size: 16px; color: red; height: 32px;">Calculate</button>
+
+               
+            </div>
+            <h3 id="result"></h3>
+    </div>
+
+   <script>
+    function calculateAveragePer()
+    {
+
+    let marks1 = parseInt(document.getElementById("sub1").value);
+    let marks2 = parseInt(document.getElementById("sub2").value);
+    let marks3 = parseInt(document.getElementById("sub3").value);
+    let totalMarks=marks1+marks2+marks3;
+    console.log( totalMarks)
+    let avgMarks=totalMarks/3;
+    const resultElement=document.getElementById('result').innerHTML=    `Your Percentage is ${avgMarks} `
+  
+    }
+   </script> 
+</body>
+</html>

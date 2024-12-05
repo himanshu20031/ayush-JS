@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb);
+        background-size: 400% 400%;
+        animation: gradientBG 8s ease infinite;
+        color: #333;
+    }
+
+    @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .player-button {
+        display: inline-block;
+        padding: 15px 30px;
+        margin: 15px;
+        font-size: 18px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #fff;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        background: linear-gradient(45deg, #6a11cb, #2575fc);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .player-button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .player-button:active {
+        transform: scale(0.95);
+    }
+
+    h1 {
+        margin-top: 50px;
+        font-size: 3rem;
+        color: black;
+    }
+    .game-container {
+        text-align: center;
+    background: linear-gradient(135deg, #ffecd2, #fcb69f);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    color: #333;
+    }
+    .result-display {
+    margin-top: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2575fc;
+}
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Rock Paper Scissors</h1>
+    <button class="player-button" onclick="playGame('Rock')">Rock</button>
+    <button class="player-button" onclick="playGame('Paper')">Paper</button>
+    <button class="player-button" onclick="playGame('Scissiors')">Scissors</button>
+    <div id="result" class="result-display">Make your move!</div>
+</div>
+ <script>
+      score={
+            win:0,
+            lose:0,
+            tie:0
+        }
+
+    function playGame(playerMove){
+        let ComputerMove=generateComputerMove()
+        alert(`Player Move" : ${playerMove}`)
+        alert(`Computer Move : ${ComputerMove}`)
+
+    }
+    
+      
+        let ComputerMove=generateComputerMove()
+        alert(`Player Move" : ${playerMove}`)
+        alert(`Computer Move : ${ComputerMove}`)
+
+        let result
+        switch(playerMove)
+        {
+            case 'Rock':
+                switch(ComputerMove)
+                {
+                    case 'Rock': result='Tie'
+                    break
+                    case 'Paper': result='Lose'
+                    break
+                    case 'Scissors': result='Win'
+                }
+            break
+            case 'Paper':
+            switch(ComputerMove)
+                {
+                    case 'Rock': result='Win'
+                    break
+                    case 'Paper': result='Tie'
+                    break
+                    case 'Scissors': result='Lose'
+                }
+            break
+            case 'Scissors':
+            switch(ComputerMove)
+                {
+                    case 'Rock': result='Lose'
+                    break
+                    case 'Paper': result='Win'
+                    break
+                    case 'Scissors': result='Tie'
+                }
+        }
+        console.log(`Result : ${result}`)
+        switch(result)
+        {
+            case 'Lose': score.lose+=1
+            break
+            case 'Win' : score.Win+=1
+            break
+            case 'Tie' : score.Tie+=1
+        }
+    
+
+    function generateComputerMove()
+    {
+        let randomNumber=Math.random()
+        alert(randomNumber)
+        let ComputerMove
+        if(randomNumber<=0.33)
+            {
+                ComputerMove='Rock'
+            }
+        
+        else if(randomNumber>0.33 && randomNumber<=0.67)
+        {
+            ComputerMove= 'Paper'
+        }
+        else
+        {
+            ComputerMove='Scissiors'
+        }
+        return ComputerMove
+    }
+    </script>
+</body>
+</html>

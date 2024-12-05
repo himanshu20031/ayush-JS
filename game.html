@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb);
+            background-size: 400% 400%;
+            animation: gradientBG 8s ease infinite;
+            color: #333;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .player-button {
+            display: inline-block;
+            padding: 15px 30px;
+            margin: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #fff;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .player-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .player-button:active {
+            transform: scale(0.95);
+        }
+
+        h1 {
+            margin-top: 50px;
+            font-size: 3rem;
+            color: black;
+        }
+
+        .game-container {
+            text-align: center;
+            background: linear-gradient(135deg, #ffecd2, #fcb69f);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            color: #333;
+        }
+
+        .result-display {
+            margin-top: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2575fc;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Rock Paper Scissors</h1>
+        <button id="rockButton" class="player-button">✊</button>
+        <button id="paperButton" class="player-button">✋</button>
+        <button id="scissorsButton" class="player-button">✌️</button>
+        <div id="result" class="result-display">Make your move!</div>
+    </div>
+
+    <script>
+        const score = { win: 0, lose: 0, tie: 0 };
+
+        document.addEventListener('keydown', (event) => {
+            const key = event.key.toUpperCase();
+            if (key === 'R') {
+                playGame('Rock');
+            } 
+            else if (key === 'P') {
+                playGame('Paper');
+            } 
+            else if (key === 'S') {
+                playGame('Scissors');
+            }
+        });
+
+        document.getElementById('rockButton').addEventListener('click', () => playGame('Rock'));
+        document.getElementById('paperButton').addEventListener('click', () => playGame('Paper'));
+        document.getElementById('scissorsButton').addEventListener('click', () => playGame('Scissors'));
+
+        function playGame(playerMove) {
+            const computerMove = generateComputerMove();
+            let result;
+
+            if (playerMove === computerMove) {
+                result = 'Tie';
+            }
+             else if (
+                (playerMove === 'Rock' && computerMove === 'Scissors') ||
+                (playerMove === 'Paper' && computerMove === 'Rock') ||
+                (playerMove === 'Scissors' && computerMove === 'Paper')
+            )
+             {
+                result = 'Win';
+            } 
+             else {
+                result = 'Lose';
+            }
+
+            updateScore(result);
+            document.getElementById('result').innerText = `
+                Player Move: ${playerMove}\n
+                Computer Move: ${computerMove}\n
+                Result: ${result}\n
+                Wins: ${score.win}, Losses: ${score.lose}, Ties: ${score.tie}`;
+        }
+
+        function updateScore(result) {
+            if (result === 'Win') {
+                score.win++;
+            }
+             else if (result === 'Lose') {
+                score.lose++;
+            } 
+            else if (result === 'Tie') {
+                score.tie++;
+            }
+        }
+
+        function generateComputerMove() {
+            const randomNumber = Math.random();
+            if (randomNumber <= 0.33) {
+                return 'Rock';
+            } 
+            else if (randomNumber <= 0.67) {
+                return 'Paper';
+            }
+             else {
+                return 'Scissors';
+            }
+        }
+    </script>
+</body>
+</html>
